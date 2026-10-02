@@ -263,6 +263,25 @@ body {
   color: #070708;
 }
 
+.copy-veil {
+  position: relative;
+  isolation: isolate;
+}
+
+.copy-veil::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -18% -10%;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(7, 7, 8, 0.9) 0%,
+    rgba(7, 7, 8, 0.62) 52%,
+    transparent 76%
+  );
+}
+
 .seal:focus-visible {
   outline: 1px solid #efeae2;
   outline-offset: 4px;

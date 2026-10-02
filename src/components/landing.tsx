@@ -74,11 +74,11 @@ function Gate({
 
   return (
     <div className="relative z-10 flex min-h-svh items-center justify-center px-6 py-16">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 w-[min(92vw,560px)] -translate-x-1/2 -translate-y-1/2 text-bone/25">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 w-[min(74vw,520px)] -translate-x-1/2 -translate-y-1/2 text-bone/25">
         <Sigil className="spin-slow h-auto w-full" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-lg flex-col items-center text-center">
+      <div className="copy-veil relative z-10 mx-auto flex w-full max-w-lg flex-col items-center text-center">
         <p className="font-mono text-[11px] tracking-[0.55em] text-blood">18+</p>
         <h1 className="chrome mt-5 font-display text-[clamp(3.5rem,12vw,6.5rem)] leading-[0.8] font-medium tracking-[-0.04em]">
           Freckles
@@ -149,12 +149,12 @@ function Gate({
 function Site() {
   return (
     <div className="relative z-10 pb-24 md:pb-0">
-      <header className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-4 px-5 pt-6 md:px-10 md:pt-8">
+      <header className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-5 pt-6 md:flex-row md:items-center md:justify-between md:px-10 md:pt-8">
         <a href="#top" className="flex items-center gap-2.5 text-bone">
           <Mark className="size-7" />
           <span className="font-mono text-[11px] tracking-[0.46em]">FRECKLES</span>
         </a>
-        <nav className="flex max-w-full gap-x-5 gap-y-2 overflow-x-auto font-mono text-[10px] tracking-[0.28em] text-ash uppercase">
+        <nav className="flex max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[10px] tracking-[0.22em] text-ash uppercase md:justify-end md:gap-x-5 md:tracking-[0.28em]">
           {portals.map((portal) => (
             <a
               key={portal.key}
@@ -169,7 +169,7 @@ function Site() {
         </nav>
       </header>
 
-      <div className="mt-5 overflow-hidden border-y border-bone/15">
+      <div className="mx-2 mt-5 overflow-hidden border-y border-bone/15 md:mx-4">
         <div className="ticker font-mono text-[10px] tracking-[0.38em] text-ash uppercase">
           <span className="px-3 py-3 whitespace-nowrap">{ticker}</span>
           <span className="px-3 py-3 whitespace-nowrap" aria-hidden="true">
@@ -181,12 +181,11 @@ function Site() {
       <main id="top">
         <section className="relative mx-auto flex min-h-[calc(100svh-7.5rem)] max-w-6xl flex-col items-center justify-center px-5 py-16 text-center md:px-10 md:py-20">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="w-[min(86vw,640px)] text-bone/30">
+            <div className="w-[min(72vw,560px)] text-bone/25">
               <Sigil className="spin-slow h-auto w-full" />
             </div>
           </div>
-          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[70%] w-px -translate-x-1/2 -translate-y-1/2 bg-linear-to-b from-transparent via-blood/80 to-transparent" />
-          <div className="pointer-events-none absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blood/15 blur-3xl" />
+          <div className="pointer-events-none absolute top-1/2 left-1/2 h-80 w-80 -translate-x-1/2 -translate-y-[42%] rounded-full bg-blood/20 blur-3xl" />
 
           <div className="relative z-10 flex flex-col items-center">
             <p className="font-mono text-[10px] tracking-[0.48em] text-ash uppercase">
@@ -201,7 +200,7 @@ function Site() {
             </p>
             <Rule className="mt-7 w-full max-w-xs" />
             <p className="mt-6 max-w-md font-serif text-xl leading-relaxed text-bone/85 italic md:text-2xl">
-              Soft mouth. Locked pages. She dared you to open them.
+              Soft mouth. Locked pages. Come closer.
             </p>
             <div className="mt-9 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
               <SealLink href={onlyfans.href} className="w-full sm:w-auto">
@@ -235,7 +234,7 @@ function Site() {
             <p className="font-mono text-[10px] tracking-[0.42em] text-ash uppercase">
               Entry 07 — after midnight
             </p>
-            <p className="mt-5 max-w-[8ch] font-blackletter text-5xl leading-[1.05] text-bone md:text-7xl">
+            <p className="mt-5 max-w-[7em] font-blackletter text-5xl leading-[1.05] text-balance text-bone md:text-7xl">
               she writes it down
             </p>
           </div>

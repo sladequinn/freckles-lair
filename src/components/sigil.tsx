@@ -1,5 +1,9 @@
 import { cn } from "@/lib/utils"
 
+function round(value: number) {
+  return Math.round(value * 100) / 100
+}
+
 const SPIKES = [0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
   const a = (deg * Math.PI) / 180
   const cos = Math.cos(a)
@@ -13,7 +17,7 @@ const SPIKES = [0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
   const y1 = 200 + sin * r1
   const tipX = 200 + cos * r2
   const tipY = 200 + sin * r2
-  return `M ${x1 + px * w} ${y1 + py * w} L ${tipX} ${tipY} L ${x1 - px * w} ${y1 - py * w} Z`
+  return `M ${round(x1 + px * w)} ${round(y1 + py * w)} L ${round(tipX)} ${round(tipY)} L ${round(x1 - px * w)} ${round(y1 - py * w)} Z`
 })
 
 const TICKS = Array.from({ length: 60 }, (_, index) => {
@@ -22,10 +26,10 @@ const TICKS = Array.from({ length: 60 }, (_, index) => {
   const inner = major ? 168 : 174
   const outer = 184
   return {
-    x1: 200 + Math.cos(a) * inner,
-    y1: 200 + Math.sin(a) * inner,
-    x2: 200 + Math.cos(a) * outer,
-    y2: 200 + Math.sin(a) * outer,
+    x1: round(200 + Math.cos(a) * inner),
+    y1: round(200 + Math.sin(a) * inner),
+    x2: round(200 + Math.cos(a) * outer),
+    y2: round(200 + Math.sin(a) * outer),
     width: major ? 1.15 : 0.45,
   }
 })
