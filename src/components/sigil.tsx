@@ -1,170 +1,154 @@
-import { cn } from "@/lib/utils"
+const fineLines = [
+  "M504 336 C568 274 552 174 651 102 C709 60 760 27 807 0",
+  "M509 377 C585 310 571 231 648 172 C705 128 742 86 770 38",
+  "M512 470 C594 445 624 350 706 365 C775 378 766 470 837 501 C895 526 934 484 958 426",
+  "M516 526 C587 507 619 430 683 439 C743 447 745 517 805 546 C855 570 906 549 935 515",
+  "M516 642 C586 610 648 577 714 622 C769 659 807 715 883 701 C923 694 951 667 973 632",
+  "M516 724 C598 676 663 709 717 768 C770 827 822 840 892 816 C928 804 953 781 974 754",
+  "M515 834 C592 820 625 908 693 971 C771 1043 818 1136 883 1243 C912 1291 933 1320 961 1344",
+  "M511 912 C567 917 596 988 648 1043 C712 1111 759 1197 810 1296 C832 1340 856 1376 889 1411",
+  "M508 1024 C550 1047 568 1120 600 1184 C641 1266 683 1336 744 1392 C773 1419 796 1442 813 1472",
+  "M505 1140 C536 1182 541 1257 568 1326 C593 1390 626 1441 675 1489",
+  "M502 1250 C522 1306 517 1371 540 1430 C557 1473 577 1511 608 1545",
+]
 
-function r(v: number) {
-  return Math.round(v * 10) / 10
-}
+const heavyLines = [
+  "M505 332 C574 261 559 164 660 90 C714 51 758 24 800 4",
+  "M512 464 C599 430 626 344 708 365 C777 383 772 467 842 500 C895 525 929 489 953 438",
+  "M515 638 C592 598 651 580 716 623 C780 666 812 721 891 699",
+  "M514 832 C594 808 631 901 697 969 C776 1051 820 1140 879 1241",
+  "M508 1020 C555 1043 574 1118 604 1185 C644 1274 686 1339 746 1390",
+]
 
-function horn(x: number, y: number, deg: number, len: number, kink: number, width: number) {
-  const steps = 28
-  const spine: { x: number; y: number }[] = [{ x, y }]
-  let cx = x
-  let cy = y
-  for (let i = 1; i <= steps; i++) {
-    const t = i / steps
-    const hk = Math.sin(t * Math.PI) * kink
-    const a = ((deg + hk) * Math.PI) / 180
-    cx += Math.cos(a) * (len / steps)
-    cy += Math.sin(a) * (len / steps)
-    spine.push({ x: cx, y: cy })
-  }
+const circuitLines = [
+  "M625 214 L665 214 L665 174 L705 174 L705 129",
+  "M706 365 L744 365 L744 328 L784 328",
+  "M837 501 L871 501 L871 463 L908 463",
+  "M714 622 L756 622 L756 584 L795 584",
+  "M717 768 L758 768 L758 806 L799 806",
+  "M693 971 L733 971 L733 1012 L773 1012",
+  "M648 1043 L686 1043 L686 1083 L723 1083",
+  "M600 1184 L638 1184 L638 1224 L675 1224",
+]
 
-  const left: string[] = []
-  const right: string[] = []
-  for (let i = 0; i < spine.length; i++) {
-    const t = i / (spine.length - 1)
-    const p0 = spine[Math.max(0, i - 1)]
-    const p1 = spine[Math.min(spine.length - 1, i + 1)]
-    const dx = p1.x - p0.x
-    const dy = p1.y - p0.y
-    const length = Math.hypot(dx, dy) || 1
-    const nx = -dy / length
-    const ny = dx / length
-    let profile: number
-    if (t < 0.12) profile = 0.35 + 0.65 * (t / 0.12)
-    else if (t < 0.28) profile = 1 - 0.62 * ((t - 0.12) / 0.16)
-    else if (t < 0.46) profile = 0.38 + 0.85 * ((t - 0.28) / 0.18)
-    else profile = 1.23 * (1 - (t - 0.46) / 0.54) ** 1.35
-    const w = Math.max(0, (width * profile) / 2)
-    left.push(`${r(spine[i].x + nx * w)} ${r(spine[i].y + ny * w)}`)
-    right.push(`${r(spine[i].x - nx * w * 0.82)} ${r(spine[i].y - ny * w * 0.82)}`)
-  }
-  right.reverse()
-  return `M ${left.join(" L ")} L ${right.join(" L ")} Z`
-}
+const barbs = [
+  "M651 102 L614 86 L638 124 Z",
+  "M648 172 L615 147 L631 191 Z",
+  "M706 365 L676 331 L690 381 Z",
+  "M837 501 L881 478 L852 522 Z",
+  "M714 622 L690 580 L731 615 Z",
+  "M883 701 L927 673 L900 719 Z",
+  "M717 768 L750 728 L739 786 Z",
+  "M693 971 L655 940 L678 990 Z",
+  "M648 1043 L613 1008 L633 1060 Z",
+  "M810 1296 L850 1272 L826 1318 Z",
+  "M568 1326 L536 1287 L552 1343 Z",
+]
 
-function hornSpine(x: number, y: number, deg: number, len: number, kink: number) {
-  const steps = 18
-  let cx = x
-  let cy = y
-  const pts = [`${r(cx)} ${r(cy)}`]
-  for (let i = 1; i <= steps; i++) {
-    const t = i / steps
-    const hk = Math.sin(t * Math.PI) * kink
-    const a = ((deg + hk) * Math.PI) / 180
-    cx += Math.cos(a) * (len / steps)
-    cy += Math.sin(a) * (len / steps)
-    pts.push(`${r(cx)} ${r(cy)}`)
-  }
-  return `M ${pts.join(" L ")}`
-}
-
-function star4(cx: number, cy: number, radius: number) {
-  const pts: string[] = []
-  for (let i = 0; i < 8; i++) {
-    const a = (i * Math.PI) / 4 - Math.PI / 2
-    const rr = i % 2 === 0 ? radius : radius * 0.3
-    pts.push(`${r(cx + Math.cos(a) * rr)} ${r(cy + Math.sin(a) * rr)}`)
-  }
-  return `M ${pts.join(" L ")} Z`
-}
-
-function thorn(x: number, y: number, deg: number, len: number, w: number) {
-  const a = (deg * Math.PI) / 180
-  const px = Math.cos(a)
-  const py = Math.sin(a)
-  const nx = -py
-  const ny = px
-  return `M ${r(x + nx * w)} ${r(y + ny * w)} L ${r(x + px * len)} ${r(y + py * len)} L ${r(x - nx * w)} ${r(y - ny * w)} Z`
-}
-
-function Marks({ fills, lines }: { fills: string[]; lines: string[] }) {
+function HalfSigil() {
   return (
-    <>
-      <g fill="currentColor">
-        {fills.map((d) => (
+    <g id="sigil-half">
+      <g className="sigil-heavy" fill="none" stroke="currentColor" strokeLinecap="round">
+        {heavyLines.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-fine" fill="none" stroke="currentColor">
+        {fineLines.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-circuit" fill="none" stroke="currentColor">
+        {circuitLines.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-barbs" fill="currentColor">
+        {barbs.map((d) => (
           <path key={d} d={d} />
         ))}
       </g>
-      <g fill="none" stroke="#e11d48" strokeWidth="1.35" className="sigil-comet">
-        {lines.map((d) => (
-          <path key={`live-${d}`} d={d} />
-        ))}
+      <g className="sigil-nodes" fill="currentColor">
+        <circle cx="705" cy="129" r="4" />
+        <circle cx="784" cy="328" r="3.5" />
+        <circle cx="908" cy="463" r="4" />
+        <circle cx="795" cy="584" r="3.5" />
+        <circle cx="799" cy="806" r="4" />
+        <circle cx="773" cy="1012" r="3.5" />
+        <circle cx="723" cy="1083" r="4" />
+        <circle cx="675" cy="1224" r="3.5" />
       </g>
-    </>
+    </g>
   )
 }
 
-function cornerArt() {
-  return {
-    fills: [
-      horn(18, 72, -8, 300, 24, 20),
-      horn(18, 108, 7, 210, -18, 12),
-      horn(18, 142, 16, 132, 12, 8),
-      horn(72, 18, 98, 300, -24, 20),
-      horn(108, 18, 83, 210, 18, 12),
-      horn(142, 18, 74, 132, -12, 8),
-      horn(48, 48, 42, 250, 16, 14),
-      horn(70, 64, 28, 156, -20, 9),
-      horn(64, 70, 58, 156, 20, 9),
-      thorn(176, 30, -72, 42, 5.5),
-      thorn(248, 54, -42, 34, 4.5),
-      thorn(30, 176, 162, 42, 5.5),
-      thorn(54, 248, 132, 34, 4.5),
-      thorn(138, 138, 45, 48, 5.5),
-      star4(40, 40, 16),
-      star4(136, 38, 10),
-      star4(38, 136, 10),
-      star4(196, 196, 9),
-      star4(268, 78, 7),
-      star4(78, 268, 7),
-    ],
-    lines: [
-      hornSpine(18, 72, -8, 300, 24),
-      hornSpine(72, 18, 98, 300, -24),
-      hornSpine(48, 48, 42, 250, 16),
-    ],
-  }
+function Spine() {
+  return (
+    <g className="sigil-spine">
+      <path d="M500 45 L500 155 M500 189 L500 390 M500 434 L500 650 M500 700 L500 948 M500 996 L500 1240 M500 1288 L500 1555" />
+      <path d="M500 38 L516 68 L500 98 L484 68 Z" />
+      <path d="M500 144 L523 172 L500 202 L477 172 Z" />
+      <path d="M500 374 L528 412 L500 451 L472 412 Z" />
+      <path d="M500 632 L535 676 L500 721 L465 676 Z" />
+      <path d="M500 930 L529 973 L500 1017 L471 973 Z" />
+      <path d="M500 1220 L524 1264 L500 1307 L476 1264 Z" />
+      <path d="M500 1510 L514 1545 L500 1582 L486 1545 Z" />
+      <path d="M480 300 L500 266 L520 300 L500 334 Z" />
+      <path d="M478 1083 L500 1047 L522 1083 L500 1120 Z" />
+    </g>
+  )
 }
 
-function sideArt() {
-  return {
-    fills: [
-      horn(28, 20, 92, 220, 18, 15),
-      horn(58, 36, 78, 160, -16, 9),
-      horn(18, 80, 104, 120, 12, 7),
-      thorn(8, 70, 180, 26, 4),
-      thorn(8, 150, 168, 22, 3.5),
-      star4(30, 48, 9),
-      star4(46, 160, 6),
-    ],
-    lines: [hornSpine(28, 20, 92, 220, 18)],
-  }
+function Glints() {
+  return (
+    <g className="sigil-glints" fill="currentColor">
+      <path d="M500 10 L508 35 L533 43 L508 51 L500 76 L492 51 L467 43 L492 35 Z" />
+      <path d="M334 344 L340 363 L359 369 L340 375 L334 394 L328 375 L309 369 L328 363 Z" />
+      <path d="M666 344 L672 363 L691 369 L672 375 L666 394 L660 375 L641 369 L660 363 Z" />
+      <path d="M272 748 L279 771 L302 778 L279 785 L272 808 L265 785 L242 778 L265 771 Z" />
+      <path d="M728 748 L735 771 L758 778 L735 785 L728 808 L721 785 L698 778 L721 771 Z" />
+      <path d="M350 1194 L356 1212 L374 1218 L356 1224 L350 1242 L344 1224 L326 1218 L344 1212 Z" />
+      <path d="M650 1194 L656 1212 L674 1218 L656 1224 L650 1242 L644 1224 L626 1218 L644 1212 Z" />
+    </g>
+  )
 }
-
-const corner = cornerArt()
-const side = sideArt()
 
 export function Field() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden text-white" aria-hidden="true">
-      <Corner className="top-0 left-0" />
-      <Corner className="top-0 right-0 -scale-x-100" />
-      <Corner className="bottom-0 left-0 -scale-y-100" />
-      <Corner className="right-0 bottom-0 [transform:scale(-1,-1)]" />
-      <svg viewBox="0 0 120 280" className="absolute top-1/2 left-0 hidden h-[42vh] w-[92px] -translate-y-1/2 lg:block">
-        <Marks fills={side.fills} lines={side.lines} />
-      </svg>
-      <svg viewBox="0 0 120 280" className="absolute top-1/2 right-0 hidden h-[42vh] w-[92px] -translate-y-1/2 -scale-x-100 lg:block">
-        <Marks fills={side.fills} lines={side.lines} />
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className="sigil-ambient absolute inset-0" />
+      <svg
+        viewBox="0 0 1000 1600"
+        preserveAspectRatio="xMidYMid meet"
+        className="sigil-stage absolute top-1/2 left-1/2 h-[118svh] min-h-[780px] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 text-bone md:h-[142vh]"
+      >
+        <defs>
+          <filter id="soft-glow" x="-30%" y="-20%" width="160%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g className="sigil-breathe">
+          <HalfSigil />
+          <g transform="translate(1000 0) scale(-1 1)">
+            <HalfSigil />
+          </g>
+          <Spine />
+          <Glints />
+        </g>
+        <g className="sigil-red" color="#e11d48" filter="url(#soft-glow)">
+          <path d="M500 45 L500 390 M500 948 L500 1240" pathLength="1" />
+          <path d={heavyLines[1]} pathLength="1" />
+          <path d={heavyLines[3]} pathLength="1" />
+          <g transform="translate(1000 0) scale(-1 1)">
+            <path d={heavyLines[1]} pathLength="1" />
+            <path d={heavyLines[3]} pathLength="1" />
+          </g>
+        </g>
       </svg>
     </div>
-  )
-}
-
-function Corner({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 400 400" className={cn("absolute h-auto w-[62vw] max-w-[300px] md:w-[340px] md:max-w-none lg:w-[420px]", className)}>
-      <Marks fills={corner.fills} lines={corner.lines} />
-    </svg>
   )
 }

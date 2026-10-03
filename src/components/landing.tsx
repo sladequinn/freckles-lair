@@ -51,7 +51,7 @@ function Gate({
     <div className="relative z-10 flex min-h-svh items-center justify-center px-6">
       <div className="flex w-full max-w-md flex-col items-center text-center">
         <p className="font-mono text-[10px] tracking-[0.5em] text-blood">18+</p>
-        <h1 className="chrome mt-4 font-display text-[clamp(3.4rem,14vw,7rem)] leading-[0.8] font-medium tracking-[-0.045em]">
+        <h1 className="sigil-wordmark mt-4 font-sigil text-[clamp(4.2rem,17vw,8.5rem)] leading-[0.72]">
           Freckles
         </h1>
         <div className="mt-4">
@@ -98,7 +98,8 @@ function Gate({
 function Site() {
   return (
     <main className="relative z-10 flex min-h-svh flex-col items-center justify-center px-6 py-16">
-      <h1 className="chrome text-center font-display text-[clamp(3.5rem,15vw,8.5rem)] leading-[0.78] font-medium tracking-[-0.045em]">
+      <div className="sigil-copy-veil absolute top-1/2 left-1/2 -z-10 h-[620px] w-[min(94vw,700px)] -translate-x-1/2 -translate-y-1/2" />
+      <h1 className="sigil-wordmark text-center font-sigil text-[clamp(4.4rem,18vw,10rem)] leading-[0.7]">
         Freckles
       </h1>
       <div className="mt-4 text-center">

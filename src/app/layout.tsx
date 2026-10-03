@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
-import { Bodoni_Moda, Geist, Geist_Mono, New_Rocker } from "next/font/google"
+import { Bodoni_Moda, Geist, Geist_Mono, New_Rocker, Pirata_One } from "next/font/google"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -23,6 +23,13 @@ const bodoni = Bodoni_Moda({
 
 const gothic = New_Rocker({
   variable: "--font-gothic",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+})
+
+const sigilDisplay = Pirata_One({
+  variable: "--font-sigil-display",
   subsets: ["latin"],
   weight: "400",
   display: "swap",
@@ -55,7 +62,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bodoni.variable} ${gothic.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bodoni.variable} ${gothic.variable} ${sigilDisplay.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-x-clip">{children}</body>
     </html>
