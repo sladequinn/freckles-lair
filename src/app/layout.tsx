@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
-import { Bodoni_Moda, Geist, Geist_Mono, Grenze_Gotisch } from "next/font/google"
+import { Bodoni_Moda, Geist, Geist_Mono, New_Rocker } from "next/font/google"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -21,7 +21,7 @@ const bodoni = Bodoni_Moda({
   display: "swap",
 })
 
-const gothic = Grenze_Gotisch({
+const gothic = New_Rocker({
   variable: "--font-gothic",
   subsets: ["latin"],
   weight: "400",

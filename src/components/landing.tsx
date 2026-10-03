@@ -13,19 +13,10 @@ function remember(value: "yes" | "no") {
   document.cookie = `freckles-age=${value}; Path=/; Max-Age=31536000; SameSite=Lax`
 }
 
-function Y() {
-  return (
-    <span className="mr-[0.08em] inline-block translate-y-[0.04em] font-display text-[0.82em] leading-none font-medium tracking-[-0.04em] italic">
-      y
-    </span>
-  )
-}
-
 function Subtitle() {
   return (
-    <p className="font-blackletter text-[clamp(1.85rem,5.4vw,3rem)] leading-[1.05] text-bone">
-      Diar<Y /> of a Wimp<Y />{" "}
-      <span className="text-blood">bitch</span>
+    <p className="text-center font-blackletter text-[clamp(1.55rem,4.8vw,2.65rem)] leading-[1.05] text-balance text-bone">
+      Diary of a Wimpy <span className="text-blood">bitch</span>
     </p>
   )
 }
@@ -43,7 +34,6 @@ export function Landing({ initialAge }: { initialAge: AgeState }) {
       <Field />
       <div className="grain pointer-events-none fixed inset-0 z-20" />
       <div className="vignette pointer-events-none fixed inset-0 z-20" />
-      <div className="pointer-events-none fixed inset-3 z-30 border border-bone/15 md:inset-4" />
 
       {age === "open" ? <Site /> : <Gate age={age} onChoose={choose} />}
     </div>
