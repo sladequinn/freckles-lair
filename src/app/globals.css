@@ -209,6 +209,11 @@ body {
   animation: trace 8.5s linear infinite;
 }
 
+.sigil-comet {
+  stroke-dasharray: 22 180;
+  animation: trace 7.5s linear infinite;
+}
+
 @keyframes trace {
   to {
     stroke-dashoffset: -520;
@@ -235,13 +240,13 @@ body {
 }
 
 .grain {
-  opacity: 0.18;
+  opacity: 0.07;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 .vignette {
-  background: radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.62) 100%);
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .seal {
@@ -323,6 +328,7 @@ a:focus-visible {
   .orbit-reverse,
   .trace,
   .glint,
+  .sigil-comet,
   .ticker {
     animation: none;
   }
