@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
-import {
-  Bodoni_Moda,
-  Cormorant_Garamond,
-  Geist,
-  Geist_Mono,
-  UnifrakturMaguntia,
-} from "next/font/google"
+import { Bodoni_Moda, Geist, Geist_Mono, Grenze_Gotisch } from "next/font/google"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -27,18 +21,10 @@ const bodoni = Bodoni_Moda({
   display: "swap",
 })
 
-const fraktur = UnifrakturMaguntia({
-  variable: "--font-fraktur",
+const gothic = Grenze_Gotisch({
+  variable: "--font-gothic",
   subsets: ["latin"],
   weight: "400",
-  display: "swap",
-})
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
   display: "swap",
 })
 
@@ -69,7 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bodoni.variable} ${fraktur.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bodoni.variable} ${gothic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-x-clip">{children}</body>
     </html>

@@ -11,7 +11,7 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-heading: var(--font-bodoni), "Times New Roman", serif;
   --font-display: var(--font-bodoni), "Times New Roman", serif;
-  --font-blackletter: var(--font-fraktur), "UnifrakturMaguntia", serif;
+  --font-blackletter: var(--font-gothic), "Grenze Gotisch", Georgia, serif;
   --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
   --color-void: #070708;
   --color-bone: #efeae2;
@@ -191,6 +191,25 @@ body {
   animation: spin-slow 90s linear infinite;
 }
 
+.orbit {
+  animation: spin-slow 150s linear infinite;
+}
+
+.orbit-reverse {
+  animation: spin-slow 210s linear infinite reverse;
+}
+
+.trace {
+  stroke-dasharray: 10 16;
+  animation: trace 36s linear infinite;
+}
+
+@keyframes trace {
+  to {
+    stroke-dashoffset: -520;
+  }
+}
+
 .ticker {
   display: flex;
   width: max-content;
@@ -295,6 +314,9 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .chrome,
   .spin-slow,
+  .orbit,
+  .orbit-reverse,
+  .trace,
   .ticker {
     animation: none;
   }
