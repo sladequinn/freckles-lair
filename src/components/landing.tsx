@@ -106,7 +106,7 @@ function Site() {
       <div className="mt-4 text-center">
         <Subtitle />
       </div>
-      <nav className="mt-10 w-full max-w-sm bg-void/70 backdrop-blur-[2px]">
+      <nav className="mt-10 w-full max-w-sm">
         {portals.map((portal) => (
           <a
             key={portal.key}
