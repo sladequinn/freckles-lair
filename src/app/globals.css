@@ -240,117 +240,179 @@ body {
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
-    rgba(7, 7, 8, 0.94) 0%,
-    rgba(7, 7, 8, 0.78) 42%,
-    rgba(7, 7, 8, 0.38) 64%,
+    rgba(7, 7, 8, 0.96) 0%,
+    rgba(7, 7, 8, 0.86) 40%,
+    rgba(7, 7, 8, 0.5) 62%,
     transparent 78%
   );
 }
 
 .sigil-ambient {
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(225, 29, 72, 0.09), transparent 28%),
-    radial-gradient(ellipse at 50% 50%, rgba(239, 234, 226, 0.035), transparent 58%);
-  animation: sigil-ambient 8s ease-in-out infinite;
+    radial-gradient(ellipse at 50% 45%, rgba(225, 29, 72, 0.16), transparent 32%),
+    radial-gradient(ellipse at 50% 50%, rgba(239, 234, 226, 0.06), transparent 62%);
+  animation: sigil-ambient 6s ease-in-out infinite;
+}
+
+.sigil-outer {
+  opacity: 0.92;
+  filter: drop-shadow(0 0 8px rgba(239, 234, 226, 0.14));
+}
+
+.sigil-drift {
+  transform-origin: 800px 500px;
+  animation: sigil-drift 11s ease-in-out infinite;
+}
+
+.sigil-outer-heavy {
+  stroke-width: 6.5px;
+  opacity: 0.92;
+}
+
+.sigil-outer-fine {
+  stroke-width: 2.2px;
+  opacity: 0.8;
+}
+
+.sigil-spikes {
+  opacity: 0.96;
 }
 
 .sigil-stage {
-  opacity: 0.82;
-  filter: drop-shadow(0 0 10px rgba(239, 234, 226, 0.08));
+  opacity: 1;
+  filter: drop-shadow(0 0 14px rgba(239, 234, 226, 0.16));
 }
 
 .sigil-breathe {
   transform-origin: 500px 800px;
-  animation: sigil-breathe 9s ease-in-out infinite;
+  animation: sigil-breathe 7s ease-in-out infinite;
 }
 
 .sigil-heavy {
-  stroke-width: 7px;
-  opacity: 0.78;
-  filter: drop-shadow(0 0 2px rgba(239, 234, 226, 0.24));
+  stroke-width: 9px;
+  opacity: 0.96;
+  filter: drop-shadow(0 0 3px rgba(239, 234, 226, 0.36));
 }
 
 .sigil-fine {
-  stroke-width: 2px;
-  opacity: 0.68;
+  stroke-width: 2.6px;
+  opacity: 0.86;
+  stroke-linecap: round;
+}
+
+.sigil-hooks {
+  stroke-width: 3.2px;
+  opacity: 0.9;
   stroke-linecap: round;
 }
 
 .sigil-circuit {
-  stroke-width: 2.5px;
-  opacity: 0.58;
+  stroke-width: 2.8px;
+  opacity: 0.82;
   stroke-linecap: square;
   stroke-linejoin: miter;
 }
 
 .sigil-heavy path,
 .sigil-fine path,
-.sigil-circuit path {
+.sigil-hooks path,
+.sigil-circuit path,
+.sigil-outer-heavy path,
+.sigil-outer-fine path {
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
-  animation: sigil-draw 12s ease-in-out infinite;
+  animation: sigil-draw 8s ease-in-out infinite;
 }
 
 .sigil-fine path:nth-child(3n + 1),
-.sigil-circuit path:nth-child(even) {
-  animation-delay: -4s;
+.sigil-circuit path:nth-child(even),
+.sigil-outer-fine path:nth-child(odd) {
+  animation-delay: -2.7s;
 }
 
 .sigil-fine path:nth-child(3n + 2),
-.sigil-heavy path:nth-child(even) {
-  animation-delay: -8s;
+.sigil-heavy path:nth-child(even),
+.sigil-hooks path:nth-child(odd),
+.sigil-outer-heavy path:nth-child(even) {
+  animation-delay: -5.4s;
 }
 
 .sigil-barbs {
-  opacity: 0.78;
+  opacity: 0.96;
 }
 
 .sigil-spine {
   fill: none;
   stroke: currentColor;
-  stroke-width: 3px;
-  opacity: 0.8;
-  filter: drop-shadow(0 0 3px rgba(239, 234, 226, 0.28));
+  stroke-width: 4px;
+  opacity: 0.96;
+  filter: drop-shadow(0 0 5px rgba(239, 234, 226, 0.4));
 }
 
 .sigil-spine path:not(:first-child) {
   fill: #070708;
+  stroke-width: 2.4px;
+}
+
+.sigil-vertebrae path {
+  fill: none;
+  stroke: currentColor;
   stroke-width: 2px;
+  opacity: 0.7;
 }
 
 .sigil-nodes {
-  opacity: 0.8;
-  animation: sigil-flicker 5s steps(1, end) infinite;
+  opacity: 0.95;
+  animation: sigil-flicker 3.6s steps(1, end) infinite;
 }
 
 .sigil-glints {
-  opacity: 0.88;
+  opacity: 1;
   transform-origin: center;
-  animation: sigil-glint 6s ease-in-out infinite;
+  animation: sigil-glint 4s ease-in-out infinite;
 }
 
 .sigil-red {
   fill: none;
   stroke: currentColor;
-  stroke-width: 3px;
+  stroke-width: 4px;
   stroke-linecap: round;
-  opacity: 0.75;
+  opacity: 0.95;
 }
 
 .sigil-red path {
-  stroke-dasharray: 0.06 0.94;
-  animation: sigil-scan 5.5s linear infinite;
+  stroke-dasharray: 0.07 0.26;
+  animation: sigil-scan 3.6s linear infinite;
+}
+
+.sigil-red path:nth-child(even) {
+  animation-delay: -1.8s;
+}
+
+.sigil-red-outer path {
+  stroke-width: 3.2px;
+  animation-duration: 4.6s;
 }
 
 @keyframes sigil-breathe {
   0%,
   100% {
-    transform: scale(0.985, 1);
-    opacity: 0.72;
+    transform: scale(0.975, 1);
+    opacity: 0.84;
   }
   50% {
-    transform: scale(1.015, 1.008);
+    transform: scale(1.025, 1.012);
     opacity: 1;
+  }
+}
+
+@keyframes sigil-drift {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.03) translateY(-6px);
   }
 }
 
@@ -361,7 +423,7 @@ body {
   }
   45%,
   55% {
-    stroke-dashoffset: 0.12;
+    stroke-dashoffset: 0.22;
   }
 }
 
@@ -517,9 +579,13 @@ a:focus-visible {
   .sigil-wordmark,
   .sigil-ambient,
   .sigil-breathe,
+  .sigil-drift,
   .sigil-heavy path,
   .sigil-fine path,
+  .sigil-hooks path,
   .sigil-circuit path,
+  .sigil-outer-heavy path,
+  .sigil-outer-fine path,
   .sigil-nodes,
   .sigil-glints,
   .sigil-red path,

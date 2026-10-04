@@ -10,6 +10,24 @@ const fineLines = [
   "M508 1024 C550 1047 568 1120 600 1184 C641 1266 683 1336 744 1392 C773 1419 796 1442 813 1472",
   "M505 1140 C536 1182 541 1257 568 1326 C593 1390 626 1441 675 1489",
   "M502 1250 C522 1306 517 1371 540 1430 C557 1473 577 1511 608 1545",
+  "M506 282 C560 236 548 160 612 118 C652 92 688 60 714 20",
+  "M514 418 C590 392 606 310 672 300 C724 292 748 342 790 372",
+  "M517 586 C604 566 650 520 724 540 C786 557 822 610 896 596",
+  "M516 684 C600 650 666 672 728 710 C788 747 836 766 902 752",
+  "M513 880 C590 866 616 946 672 1004 C736 1070 780 1150 836 1240",
+  "M509 968 C560 982 588 1052 626 1112 C672 1186 712 1250 768 1310",
+  "M506 1086 C545 1118 556 1192 586 1256 C618 1326 654 1380 706 1434",
+]
+
+const hooks = [
+  "M651 102 C690 118 702 160 684 196",
+  "M706 365 C746 346 790 352 818 384",
+  "M837 501 C870 540 866 584 840 612",
+  "M714 622 C750 646 790 640 822 616",
+  "M717 768 C760 752 806 760 838 790",
+  "M693 971 C736 988 760 1030 752 1072",
+  "M648 1043 C690 1052 716 1092 712 1136",
+  "M600 1184 C638 1200 656 1242 648 1286",
 ]
 
 const heavyLines = [
@@ -43,7 +61,111 @@ const barbs = [
   "M648 1043 L613 1008 L633 1060 Z",
   "M810 1296 L850 1272 L826 1318 Z",
   "M568 1326 L536 1287 L552 1343 Z",
+  "M684 196 L672 236 L706 212 Z",
+  "M818 384 L858 402 L832 362 Z",
+  "M840 612 L826 656 L862 632 Z",
+  "M822 616 L862 598 L838 638 Z",
+  "M838 790 L878 806 L852 768 Z",
+  "M752 1072 L744 1116 L776 1090 Z",
+  "M712 1136 L704 1180 L736 1156 Z",
+  "M648 1286 L640 1330 L672 1306 Z",
+  "M714 20 L740 0 L690 0 Z",
+  "M790 372 L834 384 L802 346 Z",
+  "M896 596 L940 606 L912 568 Z",
+  "M902 752 L946 760 L920 722 Z",
+  "M836 1240 L866 1282 L862 1226 Z",
+  "M768 1310 L794 1354 L794 1298 Z",
+  "M706 1434 L728 1478 L732 1422 Z",
 ]
+
+const vertebrae = Array.from({ length: 22 }, (_, i) => 90 + i * 68)
+
+const outerHeavy = [
+  "M-30 110 C170 150 320 290 440 430",
+  "M-30 890 C170 850 320 710 440 570",
+  "M-20 500 C140 468 270 528 400 500",
+  "M10 20 C250 70 370 300 300 520 C250 680 370 850 580 1010",
+  "M200 -20 C230 120 330 230 470 300",
+  "M200 1020 C230 880 330 770 470 700",
+]
+
+const outerFine = [
+  "M-20 200 C180 220 300 330 400 470",
+  "M-20 800 C180 780 300 670 400 530",
+  "M-20 340 C120 330 240 400 350 440",
+  "M-20 660 C120 670 240 600 350 560",
+  "M60 -20 C120 160 220 260 340 330",
+  "M60 1020 C120 840 220 740 340 670",
+  "M330 -20 C350 100 420 180 520 230",
+  "M330 1020 C350 900 420 820 520 770",
+  "M-20 60 C100 90 180 180 220 300",
+  "M-20 940 C100 910 180 820 220 700",
+]
+
+const outerCircuit = [
+  "M0 300 L60 300 L60 258 L124 258 L124 220",
+  "M0 700 L60 700 L60 742 L124 742 L124 780",
+  "M160 0 L160 56 L206 56 L206 110",
+  "M160 1000 L160 944 L206 944 L206 890",
+  "M440 0 L440 60 L486 60 L486 118",
+  "M440 1000 L440 940 L486 940 L486 882",
+  "M0 500 L48 500 L48 470 L96 470",
+  "M560 40 L560 96 L620 96",
+  "M560 960 L560 904 L620 904",
+]
+
+const outerBarbs = [
+  "M440 430 L486 448 L452 396 Z",
+  "M440 570 L486 552 L452 604 Z",
+  "M400 500 L452 486 L452 514 Z",
+  "M580 1010 L628 1030 L602 976 Z",
+  "M470 300 L518 310 L492 264 Z",
+  "M470 700 L518 690 L492 736 Z",
+  "M400 470 L446 480 L420 436 Z",
+  "M400 530 L446 520 L420 564 Z",
+  "M340 330 L384 346 L362 292 Z",
+  "M340 670 L384 654 L362 708 Z",
+  "M520 230 L566 244 L544 192 Z",
+  "M520 770 L566 756 L544 808 Z",
+  "M220 300 L252 338 L256 280 Z",
+  "M220 700 L252 662 L256 720 Z",
+]
+
+const edgeSpikes = [
+  "M0 80 L84 100 L0 120 Z",
+  "M0 240 L64 256 L0 272 Z",
+  "M0 420 L104 440 L0 460 Z",
+  "M0 540 L104 560 L0 580 Z",
+  "M0 728 L64 744 L0 760 Z",
+  "M0 880 L84 900 L0 920 Z",
+  "M100 0 L120 74 L140 0 Z",
+  "M260 0 L280 110 L300 0 Z",
+  "M380 0 L396 60 L412 0 Z",
+  "M520 0 L540 90 L560 0 Z",
+  "M660 0 L676 56 L692 0 Z",
+  "M100 1000 L120 926 L140 1000 Z",
+  "M260 1000 L280 890 L300 1000 Z",
+  "M380 1000 L396 940 L412 1000 Z",
+  "M520 1000 L540 910 L560 1000 Z",
+  "M660 1000 L676 944 L692 1000 Z",
+]
+
+const outerGlints = [
+  [120, 160, 14],
+  [120, 840, 14],
+  [300, 440, 10],
+  [300, 560, 10],
+  [560, 150, 12],
+  [560, 850, 12],
+  [60, 500, 8],
+  [400, 60, 8],
+  [400, 940, 8],
+] as const
+
+function glint(cx: number, cy: number, r: number) {
+  const s = r * 0.32
+  return `M${cx} ${cy - r} L${cx + s} ${cy - s} L${cx + r} ${cy} L${cx + s} ${cy + s} L${cx} ${cy + r} L${cx - s} ${cy + s} L${cx - r} ${cy} L${cx - s} ${cy - s} Z`
+}
 
 function HalfSigil() {
   return (
@@ -60,6 +182,11 @@ function HalfSigil() {
       </g>
       <g className="sigil-circuit" fill="none" stroke="currentColor">
         {circuitLines.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-hooks" fill="none" stroke="currentColor">
+        {hooks.map((d) => (
           <path key={d} d={d} pathLength="1" />
         ))}
       </g>
@@ -95,6 +222,59 @@ function Spine() {
       <path d="M500 1510 L514 1545 L500 1582 L486 1545 Z" />
       <path d="M480 300 L500 266 L520 300 L500 334 Z" />
       <path d="M478 1083 L500 1047 L522 1083 L500 1120 Z" />
+      <g className="sigil-vertebrae">
+        {vertebrae.map((y, i) => (
+          <path key={y} d={i % 3 === 0 ? `M470 ${y} L530 ${y}` : `M484 ${y} L516 ${y}`} />
+        ))}
+      </g>
+    </g>
+  )
+}
+
+function OuterHalf() {
+  return (
+    <g>
+      <g className="sigil-outer-heavy" fill="none" stroke="currentColor" strokeLinecap="round">
+        {outerHeavy.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-outer-fine" fill="none" stroke="currentColor" strokeLinecap="round">
+        {outerFine.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-circuit" fill="none" stroke="currentColor">
+        {outerCircuit.map((d) => (
+          <path key={d} d={d} pathLength="1" />
+        ))}
+      </g>
+      <g className="sigil-barbs" fill="currentColor">
+        {outerBarbs.map((d) => (
+          <path key={d} d={d} />
+        ))}
+      </g>
+      <g className="sigil-spikes" fill="currentColor">
+        {edgeSpikes.map((d) => (
+          <path key={d} d={d} />
+        ))}
+      </g>
+      <g className="sigil-glints" fill="currentColor">
+        {outerGlints.map(([cx, cy, r]) => (
+          <path key={`${cx}-${cy}`} d={glint(cx, cy, r)} />
+        ))}
+      </g>
+      <g className="sigil-nodes" fill="currentColor">
+        <circle cx="124" cy="220" r="4.5" />
+        <circle cx="124" cy="780" r="4.5" />
+        <circle cx="206" cy="110" r="4" />
+        <circle cx="206" cy="890" r="4" />
+        <circle cx="486" cy="118" r="4" />
+        <circle cx="486" cy="882" r="4" />
+        <circle cx="96" cy="470" r="4" />
+        <circle cx="620" cy="96" r="4" />
+        <circle cx="620" cy="904" r="4" />
+      </g>
     </g>
   )
 }
@@ -118,6 +298,28 @@ export function Field() {
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       <div className="sigil-ambient absolute inset-0" />
       <svg
+        viewBox="0 0 1600 1000"
+        preserveAspectRatio="xMidYMid slice"
+        className="sigil-outer absolute inset-0 h-full w-full text-bone"
+      >
+        <g className="sigil-drift">
+          <OuterHalf />
+          <g transform="translate(1600 0) scale(-1 1)">
+            <OuterHalf />
+          </g>
+        </g>
+        <g className="sigil-red sigil-red-outer" color="#e11d48">
+          <path d={outerHeavy[3]} pathLength="1" />
+          <path d={outerHeavy[0]} pathLength="1" />
+          <path d={outerHeavy[1]} pathLength="1" />
+          <g transform="translate(1600 0) scale(-1 1)">
+            <path d={outerHeavy[3]} pathLength="1" />
+            <path d={outerHeavy[0]} pathLength="1" />
+            <path d={outerHeavy[1]} pathLength="1" />
+          </g>
+        </g>
+      </svg>
+      <svg
         viewBox="0 0 1000 1600"
         preserveAspectRatio="xMidYMid meet"
         className="sigil-stage absolute top-1/2 left-1/2 h-[118svh] min-h-[780px] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 text-bone md:h-[142vh]"
@@ -140,12 +342,18 @@ export function Field() {
           <Glints />
         </g>
         <g className="sigil-red" color="#e11d48" filter="url(#soft-glow)">
-          <path d="M500 45 L500 390 M500 948 L500 1240" pathLength="1" />
+          <path d="M500 45 L500 1555" pathLength="1" />
+          <path d={heavyLines[0]} pathLength="1" />
           <path d={heavyLines[1]} pathLength="1" />
+          <path d={heavyLines[2]} pathLength="1" />
           <path d={heavyLines[3]} pathLength="1" />
+          <path d={heavyLines[4]} pathLength="1" />
           <g transform="translate(1000 0) scale(-1 1)">
+            <path d={heavyLines[0]} pathLength="1" />
             <path d={heavyLines[1]} pathLength="1" />
+            <path d={heavyLines[2]} pathLength="1" />
             <path d={heavyLines[3]} pathLength="1" />
+            <path d={heavyLines[4]} pathLength="1" />
           </g>
         </g>
       </svg>

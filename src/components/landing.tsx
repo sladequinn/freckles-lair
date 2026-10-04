@@ -49,6 +49,7 @@ function Gate({
 }) {
   return (
     <div className="relative z-10 flex min-h-svh items-center justify-center px-6">
+      <div className="sigil-copy-veil absolute top-1/2 left-1/2 -z-10 h-[560px] w-[min(94vw,640px)] -translate-x-1/2 -translate-y-1/2" />
       <div className="flex w-full max-w-md flex-col items-center text-center">
         <p className="font-mono text-[10px] tracking-[0.5em] text-blood">18+</p>
         <h1 className="sigil-wordmark mt-4 font-sigil text-[clamp(4.2rem,17vw,8.5rem)] leading-[0.72]">
@@ -105,7 +106,7 @@ function Site() {
       <div className="mt-4 text-center">
         <Subtitle />
       </div>
-      <nav className="mt-10 w-full max-w-sm">
+      <nav className="mt-10 w-full max-w-sm bg-void/70 backdrop-blur-[2px]">
         {portals.map((portal) => (
           <a
             key={portal.key}
