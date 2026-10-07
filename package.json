@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4317 -H 0.0.0.0",
-    "build:game": "npm --prefix freakoff ci && npm --prefix freakoff run build",
+    "build:game": "npm --prefix freakoff ci --include=dev && npm --prefix freakoff run build",
     "build": "npm run build:game && next build",
     "start": "next start",
     "lint": "eslint"
