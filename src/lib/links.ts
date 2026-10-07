@@ -46,3 +46,5 @@ export const portals: Portal[] = [
 
 export const onlyfans = portals[0]
 export const fansly = portals[1]
+
+export const freakoff = "/freakoff"

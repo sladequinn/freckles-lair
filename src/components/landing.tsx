@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Field } from "@/components/sigil"
 import { portals } from "@/lib/links"
+import { useFrecklesDoor } from "@/lib/secret"
 import { cn } from "@/lib/utils"
 
 export type AgeState = "locked" | "open" | "refused"
@@ -18,6 +19,26 @@ function Subtitle() {
     <p className="text-center font-blackletter text-[clamp(1.55rem,4.8vw,2.65rem)] leading-[1.05] text-balance text-bone">
       Diary of a Wimpy <span className="text-blood">bitch</span>
     </p>
+  )
+}
+
+function Wordmark({ className }: { className?: string }) {
+  const knock = useFrecklesDoor()
+
+  return (
+    <h1
+      className={cn("sigil-wordmark cursor-default select-none font-sigil", className)}
+      onClick={knock}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault()
+          knock()
+        }
+      }}
+      tabIndex={0}
+    >
+      Freckles
+    </h1>
   )
 }
 
@@ -52,9 +73,7 @@ function Gate({
       <div className="sigil-copy-veil absolute top-1/2 left-1/2 -z-10 h-[560px] w-[min(94vw,640px)] -translate-x-1/2 -translate-y-1/2" />
       <div className="flex w-full max-w-md flex-col items-center text-center">
         <p className="font-mono text-[10px] tracking-[0.5em] text-blood">18+</p>
-        <h1 className="sigil-wordmark mt-4 font-sigil text-[clamp(4.2rem,17vw,8.5rem)] leading-[0.72]">
-          Freckles
-        </h1>
+        <Wordmark className="mt-4 text-[clamp(4.2rem,17vw,8.5rem)] leading-[0.72]" />
         <div className="mt-4">
           <Subtitle />
         </div>
@@ -100,9 +119,7 @@ function Site() {
   return (
     <main className="relative z-10 flex min-h-svh flex-col items-center justify-center px-6 py-16">
       <div className="sigil-copy-veil absolute top-1/2 left-1/2 -z-10 h-[620px] w-[min(94vw,700px)] -translate-x-1/2 -translate-y-1/2" />
-      <h1 className="sigil-wordmark text-center font-sigil text-[clamp(4.4rem,18vw,10rem)] leading-[0.7]">
-        Freckles
-      </h1>
+      <Wordmark className="text-center text-[clamp(4.4rem,18vw,10rem)] leading-[0.7]" />
       <div className="mt-4 text-center">
         <Subtitle />
       </div>
