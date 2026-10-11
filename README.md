@@ -13,7 +13,7 @@ Open [http://127.0.0.1:4317](http://127.0.0.1:4317).
 
 The first screen asks for an 18+ confirmation. The answer is stored in a cookie named `freckles-age`.
 
-Tap **Freckles** five times quickly to drop into [THE FREAKOFF: SHADOW WARS](https://github.com/sladequinn/thefreakoff), vendored in `freakoff/` and served at `/freakoff/`.
+Tap **Freckles** five times quickly to drop into [THE FREAKOFF: SHADOW WARS](https://github.com/sladequinn/thefreakoff), vendored in `freakoff/` and served at `/freakoff/`. The vendored game includes the eight-round character art overhaul from [thefreakoff PR #1](https://github.com/sladequinn/thefreakoff/pull/1), with rebuilt fighters, robot enemies, portraits and animation poses.
 
 ## Links
 
